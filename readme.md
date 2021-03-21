@@ -47,7 +47,7 @@ and get started with your own repository.
 
 1. Copy code.
    ```
-   npx degit https://github.com/pglezen/ets.git myapp
+   npx degit https://github.com/pglezen/electron-typescript-svelte-starter.git myapp
    ```
 
 2. Install dependencies.
