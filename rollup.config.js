@@ -39,7 +39,12 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
+			preprocess: sveltePreprocess({ 
+				sourceMap: !production,
+				typescript: {
+					tsconfigFile: 'tsconfig-ui.json'
+				}
+			}),
 			compilerOptions: {
 				dev: !production
 			}

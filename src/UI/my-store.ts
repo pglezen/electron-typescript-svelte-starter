@@ -18,6 +18,6 @@ window.ipc.on('open-database', (evt, name: string) => {
 })
 
 window.ipc.on('set-stuff', (evt, stuff: SomeType[]) => {
-  globalStuff .set(stuff);
+  globalStuff.set(stuff);
 })
 

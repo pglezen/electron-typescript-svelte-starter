@@ -6,37 +6,39 @@ Contents
 * [Project Structure](#project-structure)
 * [FAQ](#faq)
 
-This is a *starting point* repository for Electron applications that integrate
+This is a *starting point* repository for Electron applications that
+integrate the following:
 
 * [TypeScript](https://www.typescriptlang.org/) – A type-safety system
   on top of JavaScript
 * [Svelte](https://svelte.dev/) – Web UI Framework
 * [Electron Context Isolation](https://www.electronjs.org/docs/tutorial/security#3-enable-context-isolation-for-remote-content) - The latest
-  security practices incorporated into Electron 12.
+  security practices incorporated into Electron.
+
+| Package | Version   |
+|---------|-----------|
+|Electron | **13.1**  |
+|Svelte   | **3.38**  |
+
 
 I'm relatively new to all three of these packages.
 Even with several articles on the web perporting to
-explain how to combine them, I ended
-up with a *hello world* screen that could not be extended
-and did not run in Electron 12 (which
-[does away with `nodeIntegration` in favor of `contextIsolation`](https://github.com/electron/electron/issues/23506)).
+explain how to combine them, I ended up with a
+*hello world* screen that could not be easily extended
+and did not run well in Electron 12 (which
+[changed the `nodeIntegration` default in favor of `contextIsolation`](https://github.com/electron/electron/issues/23506)).
 
 If you do **not** intend to load remote content in your renderer
 processes, then this approach may be overkill for you.  You can
 probably follow other "getting-started" tutorials that do a better
-job of configuring hot-replacment and just remember to replace
+job of configuring hot-replacment and just remember to add
 
 ```
 nodeIntegration: true
-```
-
-with
-
-```
 contextIsolation: false
 ```
 
-in your web preferences.
+to your web preferences.
 
 
 ## Getting Started
@@ -75,6 +77,8 @@ and get started with your own repository.
    ```
 
 ## Project Structure
+
+* `build` - Used for build-time artifacts
 
 * `dist` - The final runtime.  
 
