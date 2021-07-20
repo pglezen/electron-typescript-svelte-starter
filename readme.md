@@ -80,7 +80,8 @@ and get started with your own repository.
 
 * `build` - Used for build-time artifacts
 
-* `dist` - The final runtime.  
+* `dist` - Main process files go here.  Files for supporting
+  render processes go in subdirectories.
 
 * `dist/mainWin` – The renderer process of the main window.
 
