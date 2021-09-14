@@ -8,6 +8,7 @@ const createWindow = () => {
     webPreferences: {
       devTools: true,
       preload: path.join(app.getAppPath(), 'dist', 'preload.js'),
+      nativeWindowOpen: false,   // Default in Electron 15
     }
   });
   mainWindow.loadFile(path.join('dist', 'mainWin', 'index.html'));
