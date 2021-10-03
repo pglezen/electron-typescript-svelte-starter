@@ -5,6 +5,8 @@ Contents
 * [Getting Started](#getting-started)
 * [Project Structure](#project-structure)
 * [FAQ](#faq)
+* [Creating New Windows](#new-window)
+* [Logger](#logger)
 
 This is a *starting point* repository for Electron applications that
 integrate the following:
@@ -17,8 +19,8 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **13.1**  |
-|Svelte   | **3.38**  |
+|Electron | **14.0**  |
+|Svelte   | **3.42**  |
 
 
 I'm relatively new to all three of these packages.
@@ -83,14 +85,19 @@ and get started with your own repository.
 * `dist` - Main process files go here.  Files for supporting
   render processes go in subdirectories.
 
-* `dist/mainWin` – The renderer process of the main window.
+* `dist/mainWindow` – The renderer process of the main window.
+
+* `dist/logsWindow` - The renderer process of the logger window.
 
 * `src/sometypes.d.ts` – a type definition file for use by the project.
 
 * `src/main` – TypeScript source for the main processes.
 
 * `src/UI` – Svelte source code for the renderer process
-  using `lang="ts"` to support TypeScript.
+  using `lang="ts"` to support TypeScript.  For each subdirectory `xxxx`
+  of this folder there should be a
+  * `dist/xxxxWindow` folder
+  * a `buildWindow('xxxx')` entry in the exported array at the bottom of `rollup.config.js`.
 
 
 ## FAQ
@@ -150,3 +157,55 @@ I run `npm run dev` that dynamically recompiles the renderer TypeScript.
 But the renderer window still requires a manual refresh (ctrl/cmd-R).
 I'm not sure if `rollup-plugin-livereload` knows how to deal with an
 Electron renderer.
+
+## New Window
+
+Here are the steps for creating a new window.
+
+1. Create a new subdirectory of `dist` named `xxxxWindow` where
+   `xxxx` is some prefix that identifies your window.  We'll be using
+   `xxxx` as a prefix for several other artifacts.
+
+2. Copy the `index.html` from the `mainWindow` directory into `xxxxWindow`.
+   Change the `<title>` and script references as appropriate.  Leave the
+   references to `./bundle.css` and `./bundle.js`.
+
+3. Create a `xxxx` subdirectory of `src/UI`.  Copy `../mainWindow/index.ts`
+   into this new directory.  This will be your window's entry point.
+
+4. Add your Svelte code to this directory.  Reference your `*.svelte`
+   component from `index.ts`.
+
+5. (Optional) Add a custom `xxxxPreload.js` script to `src/main` if you
+   wish to customize what is exposed to this window.  This might be desirable
+   if this window loads external content or scripts.  Otherwise using
+   the `preload.js` used by the main window is fine.
+
+6. Edit `rollup.config.js`.  Add a new call to `buildWindow` for your new
+   window.  For example:
+
+   ```js
+   export default [
+     buildWindow('main', true),
+     buildWindow('logs'),
+     buildWindow('xxxx'),
+   ]
+   ```
+
+   Omitting the second parameter (default `false`) avoids running multiple
+   instances of the test server.  Only the main window should run the test
+   server.
+
+You won't see this window until you load it from your main process.
+
+## Logger
+
+A logging component is included both as a useful utility and as a
+demonstration of creating a new window with its own *preload* script.
+
+The `console.log` output from a renderer process is available from
+the `BrowserWindow` debugger.  The main process output is available
+from the CLI *when the application is run from the CLI*.  But this
+is not the case when run as an application.  This component creates
+a window that application users can open and use to report back to
+the application developer events about the main process.

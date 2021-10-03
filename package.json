@@ -1,6 +1,6 @@
 {
   "name": "ets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Electron Typescript and Svelte Starter",
   "main": "dist/start.js",
   "scripts": {
@@ -21,8 +21,11 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-typescript": "^8.2.0",
     "@tsconfig/node12": "^1.0.7",
+    "@tsconfig/node14": "^1.0.1",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/luxon": "^2.0.4",
     "electron": "^14.0.1",
+    "luxon": "^2.0.2",
     "rollup": "^2.42.1",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",

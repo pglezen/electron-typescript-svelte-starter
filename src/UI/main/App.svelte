@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {  dbname } from './my-store';
+	import {  dbname } from '../my-store';
 
 </script>
 

@@ -1,6 +1,6 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
@@ -29,45 +29,51 @@ function serve() {
 	};
 }
 
-export default {
-	input: 'src/UI/index.ts',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'dist/mainWin/bundle.js'
-	},
-	plugins: [
-		svelte({
-			preprocess: sveltePreprocess({ 
-				sourceMap: !production,
-				typescript: {
-					tsconfigFile: 'tsconfig-ui.json'
-				}
-			}),
-			compilerOptions: {
-				dev: !production
-			}
-		}),
-		css({ output: 'bundle.css' }),
+function buildWindow (name, runServer = false) {
+  return {
+    input: `src/UI/${name}/index.ts`,
+    output: {
+      sourcemap: true,
+      format: 'iife',
+      name: 'app',
+      file: `dist/${name}Window/bundle.js`
+    },
+    plugins: [
+      svelte({
+        preprocess: sveltePreprocess({ 
+          sourceMap: !production,
+          typescript: {
+            tsconfigFile: 'tsconfig-ui.json'
+          }
+        }),
+        compilerOptions: {
+          dev: !production
+        }
+      }),
+      css({ output: 'bundle.css' }),
+      nodeResolve({
+        browser: true,
+        dedupe: ['svelte'],
+      }),
+      commonjs(),
+      typescript({
+        tsconfig: 'tsconfig-ui.json',
+        sourceMap: true,
+        inlineSources: true,
+      }),
 
-		resolve({
-			browser: true,
-			dedupe: ['svelte'],
-		}),
-		commonjs(),
-		typescript({
-			tsconfig: 'tsconfig-ui.json',
-			sourceMap: !production,
-			inlineSources: !production,
-		}),
+      !production && runServer && serve(),
+      !production && livereload(`dist/${name}Window`),
 
-		!production && serve(),
-		!production && livereload('dist'),
-
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	}
+      production && terser()
+    ],
+    watch: {
+      clearScreen: false
+    }
+  };
 };
+
+export default [
+  buildWindow('main', true),
+  buildWindow('logs'),
+]
