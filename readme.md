@@ -23,8 +23,9 @@ integrate the following:
 |Svelte   | **3.42**  |
 
 
-I'm relatively new to all three of these packages.
-Even with several articles on the web perporting to
+I'm still relatively new to all three of these packages
+and I don't get out much.
+Even with several articles on the web purporting to
 explain how to combine them, I ended up with a
 *hello world* screen that could not be easily extended
 and did not run well in Electron 12 (which
@@ -131,10 +132,10 @@ For renderers with `contextIsolation = true`, neither the Node.js nor the
 Electron components which leverage Node.js are available to the renderer
 processes; not even `ipcRenderer`, which is generally regarded as the bare
 minimum.  The "loophole" is a `preload.js` script (configured in
-`webPreferences`) that determines exactly what may is allowed by
+`webPreferences`) that determines exactly what is allowed by
 
-1. Importing/Creating it.
-2. Passing it to `contextBridge.exposeInMainWorld`
+1. Importing/Creating it,
+2. Passing it to `contextBridge.exposeInMainWorld`.
 
 The [contextBridge](https://www.electronjs.org/docs/api/context-bridge) will
 ensure that these items (and only these items) are available to renderer processes
@@ -166,11 +167,11 @@ Here are the steps for creating a new window.
    `xxxx` is some prefix that identifies your window.  We'll be using
    `xxxx` as a prefix for several other artifacts.
 
-2. Copy the `index.html` from the `mainWindow` directory into `xxxxWindow`.
+2. Copy the `index.html` from the `dist/mainWindow` directory into `dist/xxxxWindow`.
    Change the `<title>` and script references as appropriate.  Leave the
    references to `./bundle.css` and `./bundle.js`.
 
-3. Create a `xxxx` subdirectory of `src/UI`.  Copy `../mainWindow/index.ts`
+3. Create a `xxxx` subdirectory of `src/UI`.  Copy `src/UI/main/index.ts`
    into this new directory.  This will be your window's entry point.
 
 4. Add your Svelte code to this directory.  Reference your `*.svelte`
