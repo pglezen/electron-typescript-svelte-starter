@@ -19,8 +19,8 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **14.0**  |
-|Svelte   | **3.42**  |
+|Electron | **14.1**  |
+|Svelte   | **3.43**  |
 
 
 I'm still relatively new to all three of these packages
