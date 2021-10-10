@@ -150,6 +150,29 @@ The approach I've taken is a bit more relaxed, using a generic `send` and `on`
 methods of an `ipc` member, to be added to the `window` global context of the
 render.
 
+![Context Bridge Diagram](contextBridge.svg)
+
+The diagram above illustates how to interweave the context bridge
+definitions with the global namespace TypeScript declarations.
+
+* The `preload.js` script (shown at the top) is defined in the
+  main process.  It is passed to the `webPreferences` option for
+  a new `BrowserWindow` instance.
+
+* The new renderer process has the `send` and `on` functions
+  available to it on the `window` object as attributes of an
+  `ipc` object (i.e. `window.ipc.send` and `window.ipc.on`).
+
+* A TypeScript compiler will mark these functions as **undefined**.
+  To inform the TypeScript compiler of their existence, a
+  `declare global` statement is added to declare the existence of
+  these functions on the `window.ipc` scope.  This makes it
+  to all the Svelte code files that import the store.
+
+The context bridge action is indicated with red arrow.  The
+affect of the TypeScript `global declare` is indicated with
+the orange arrows.
+
 ### Why no dynamic updates?
 
 I'm just not good enough at this stuff, yet.  For now, I recompile
