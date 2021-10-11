@@ -19,7 +19,7 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **14.1**  |
+|Electron | **15.1**  |
 |Svelte   | **3.43**  |
 
 

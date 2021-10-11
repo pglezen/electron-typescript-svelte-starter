@@ -1,7 +1,7 @@
 // Requirements
 //   Register a hot key to dump to a file.
 
-import { webContents, dialog } from 'electron';
+import { WebContents, dialog } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import { EOL } from 'os';
@@ -10,8 +10,8 @@ import type { LogRecord } from '../logs';
 
 class Logger {
   logs: LogRecord[] = [];
-  logContents: webContents | undefined;
-  mainContents: webContents | undefined;
+  logContents:  WebContents | undefined;
+  mainContents: WebContents | undefined;
 
   addLog(message: string, error = false): void {
     const timestamp = DateTime.now().toISO();
