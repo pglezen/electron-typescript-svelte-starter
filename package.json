@@ -9,6 +9,28 @@
     "dev": "rollup -c -w",
     "start": "electron ."
   },
+  "build": {
+    "appId": "com.yourcompany.yourgroup.yourapp",
+    "directories": {
+      "output": "deploy"
+    },
+    "files": [
+      "dist/**"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "zip",
+      "certificateFile": "private/codesign.p12",
+      "certificatePassword": "",
+      "verifyUpdateCodeSignature": false
+    },
+    "linux": {
+      "category": "Utility"
+    }
+  },
   "keywords": [
     "electron",
     "typescript",
@@ -24,7 +46,6 @@
     "@tsconfig/node14": "^1.0.1",
     "@tsconfig/svelte": "^2.0.1",
     "@types/luxon": "^2.0.4",
-    "electron": "^14.1.0",
     "luxon": "^2.0.2",
     "rollup": "^2.42.1",
     "rollup-plugin-css-only": "^3.1.0",
@@ -35,5 +56,8 @@
     "svelte-check": "^2.2.0",
     "svelte-preprocess": "^4.6.9",
     "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "electron": "^16.0.4"
   }
 }

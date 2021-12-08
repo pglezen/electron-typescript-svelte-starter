@@ -7,6 +7,7 @@ Contents
 * [FAQ](#faq)
 * [Creating New Windows](#new-window)
 * [Logger](#logger)
+* [electron-builder](#electron-builder)
 
 This is a *starting point* repository for Electron applications that
 integrate the following:
@@ -19,12 +20,11 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **14.1**  |
-|Svelte   | **3.43**  |
+|Electron | **16.1**  |
+|Svelte   | **3.44**  |
 
 
-I'm still relatively new to all three of these packages
-and I don't get out much.
+I'm still relatively new to all three of these packages.
 Even with several articles on the web purporting to
 explain how to combine them, I ended up with a
 *hello world* screen that could not be easily extended
@@ -81,10 +81,16 @@ and get started with your own repository.
 
 ## Project Structure
 
-* `build` - Used for build-time artifacts
+* `build` - Used for build-time artifacts like icons.
+
+* `deploy` – Used by [electron-builder](https://www.electron.build/)
+  for distributing the final executable.  Note that electron-builder
+  uses `dist` by default.  This has to be changed in the build
+  configuration.
 
 * `dist` - Main process files go here.  Files for supporting
-  render processes go in subdirectories.
+  render processes go in subdirectories.  This is a transpiling
+  target for TypeScript and Svelte.
 
 * `dist/mainWindow` – The renderer process of the main window.
 
@@ -233,3 +239,16 @@ from the CLI *when the application is run from the CLI*.  But this
 is not the case when run as an application.  This component creates
 a window that application users can open and use to report back to
 the application developer events about the main process.
+
+## electron-builder
+
+The `package.json` has a `build` section for running
+[electron-builder](https://www.electron.build/).  I didn't add it
+to this project's dependency list because many people prefer to install
+it globally.  If you do not wish to use electon-builder, simply
+disregard or remove the `build` section from `package.json`.
+
+Note that this project's build configuration overrides the default
+output directory to be `deploy` instead of `dist`, since `dist` is
+already being used for the transpilation target.  The `dist` directory
+is the **source** for electron-builder.
