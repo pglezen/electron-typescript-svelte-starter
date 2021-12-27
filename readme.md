@@ -20,7 +20,7 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **16.1**  |
+|Electron | **16.0**  |
 |Svelte   | **3.44**  |
 
 
@@ -55,25 +55,31 @@ and get started with your own repository.
    npx degit https://github.com/pglezen/electron-typescript-svelte-starter.git myapp
    ```
 
-2. Install dependencies.
+2. Change to `myapp` directory.
+
+   ```
+   cd myapp
+   ```
+
+3. Install dependencies.
 
    ```
    npm install
    ```
 
-3. Compile main process components.
+4. Compile main process components.
 
    ```
    npm run build:main
    ```
 
-4. Compile main window compoments.
+5. Compile main window compoments.
 
    ```
    npm run build:ui
    ```
 
-5. Run application.
+6. Run application.
 
    ```
    npm run start

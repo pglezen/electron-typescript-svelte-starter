@@ -44,7 +44,7 @@
     "@rollup/plugin-typescript": "^8.2.0",
     "@tsconfig/node12": "^1.0.7",
     "@tsconfig/node14": "^1.0.1",
-    "@tsconfig/svelte": "^2.0.1",
+    "@tsconfig/svelte": "^3.0.0",
     "@types/luxon": "^2.0.4",
     "luxon": "^2.0.2",
     "rollup": "^2.42.1",
