@@ -1,5 +1,7 @@
 # ETS - Electron, TypeScript and Svelte
 
+![title logo](title.svg)
+
 Contents
 
 * [Getting Started](#getting-started)
@@ -20,15 +22,17 @@ integrate the following:
 
 | Package | Version   |
 |---------|-----------|
-|Electron | **16.0**  |
-|Svelte   | **3.44**  |
+|Electron | **19.0.6**  |
+|Svelte   | **3.48.0**  |
 
+Check the
+[new Electron release cadence](https://www.electronjs.org/blog/8-week-cadence)
+for information on updating to new releases.
 
-I'm still relatively new to all three of these packages.
-Even with several articles on the web purporting to
-explain how to combine them, I ended up with a
-*hello world* screen that could not be easily extended
-and did not run well in Electron 12 (which
+Many articles on the web purport to explain how to combine
+Svelte, Electron and TypeScript.   One usually ends up with a
+*hello world* screen that can not be easily extended
+and nor run well in Electron 12 (which
 [changed the `nodeIntegration` default in favor of `contextIsolation`](https://github.com/electron/electron/issues/23506)).
 
 If you do **not** intend to load remote content in your renderer
